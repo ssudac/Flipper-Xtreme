@@ -3,6 +3,7 @@ name: 'Check submodules branch'
 on:
   push:
     branches:
+      - main
       - dev
       - "release*"
     tags:
