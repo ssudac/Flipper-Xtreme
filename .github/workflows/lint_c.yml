@@ -3,6 +3,7 @@ name: 'Lint C/C++ with clang-format'
 on:
   push:
     branches:
+      - main
       - dev
       - "release*"
     tags:
