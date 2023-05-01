@@ -126,6 +126,10 @@ Bt* bt_alloc() {
         bt_settings_save(&bt->bt_settings);
     }
     // Keys storage
+    Storage* storage = furi_record_open(RECORD_STORAGE);
+    storage_common_copy(storage, BT_KEYS_STORAGE_OLD_PATH, BT_KEYS_STORAGE_PATH);
+    storage_common_remove(storage, BT_KEYS_STORAGE_OLD_PATH);
+    furi_record_close(RECORD_STORAGE);
     bt->keys_storage = bt_keys_storage_alloc(BT_KEYS_STORAGE_PATH);
     // Alloc queue
     bt->message_queue = furi_message_queue_alloc(8, sizeof(BtMessage));
@@ -398,7 +402,7 @@ void bt_set_profile_adv_name(Bt* bt, const char* fmt, ...) {
     furi_assert(bt);
     furi_assert(fmt);
 
-    char name[FURI_HAL_VERSION_DEVICE_NAME_LENGTH];
+    char name[FURI_HAL_BT_ADV_NAME_LENGTH];
     va_list args;
     va_start(args, fmt);
     vsnprintf(name, sizeof(name), fmt, args);

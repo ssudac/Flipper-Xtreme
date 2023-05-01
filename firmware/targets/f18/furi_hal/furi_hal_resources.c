@@ -4,8 +4,10 @@
 #include <stm32wbxx_ll_rcc.h>
 #include <stm32wbxx_ll_pwr.h>
 
-const GpioPin vibro_gpio = {.port = GPIOA, .pin = LL_GPIO_PIN_8};
-const GpioPin ibutton_gpio = {.port = GPIOB, .pin = LL_GPIO_PIN_14};
+#define TAG "FuriHalResources"
+
+const GpioPin gpio_vibro = {.port = GPIOA, .pin = LL_GPIO_PIN_8};
+const GpioPin gpio_ibutton = {.port = GPIOB, .pin = LL_GPIO_PIN_14};
 
 const GpioPin gpio_display_cs = {.port = GPIOC, .pin = LL_GPIO_PIN_11};
 const GpioPin gpio_display_rst_n = {.port = GPIOB, .pin = LL_GPIO_PIN_0};
@@ -55,7 +57,7 @@ const GpioPin gpio_i2c_power_scl = {.port = GPIOA, .pin = LL_GPIO_PIN_9};
 
 const GpioPin gpio_speaker = {.port = GPIOB, .pin = LL_GPIO_PIN_8};
 
-const GpioPin periph_power = {.port = GPIOA, .pin = LL_GPIO_PIN_3};
+const GpioPin gpio_periph_power = {.port = GPIOA, .pin = LL_GPIO_PIN_3};
 
 const GpioPin gpio_usb_dm = {.port = GPIOA, .pin = LL_GPIO_PIN_11};
 const GpioPin gpio_usb_dp = {.port = GPIOA, .pin = LL_GPIO_PIN_12};
@@ -116,8 +118,8 @@ void furi_hal_resources_init_early() {
     furi_hal_resources_init_input_pins(GpioModeInput);
 
     // SD Card stepdown control
-    furi_hal_gpio_write(&periph_power, 1);
-    furi_hal_gpio_init(&periph_power, GpioModeOutputOpenDrain, GpioPullNo, GpioSpeedLow);
+    furi_hal_gpio_write(&gpio_periph_power, 1);
+    furi_hal_gpio_init(&gpio_periph_power, GpioModeOutputOpenDrain, GpioPullNo, GpioSpeedLow);
 
     // Display pins
     furi_hal_gpio_write(&gpio_display_rst_n, 1);
@@ -163,6 +165,10 @@ void furi_hal_resources_init() {
     // Button pins
     furi_hal_resources_init_input_pins(GpioModeInterruptRiseFall);
 
+    // Explicit pulls pins
+    furi_hal_gpio_init(&gpio_speaker, GpioModeAnalog, GpioPullDown, GpioSpeedLow);
+    furi_hal_gpio_init(&gpio_vibro, GpioModeAnalog, GpioPullDown, GpioSpeedLow);
+
     // Display pins
     furi_hal_gpio_init(&gpio_display_rst_n, GpioModeOutputPushPull, GpioPullNo, GpioSpeedLow);
     furi_hal_gpio_write(&gpio_display_rst_n, 0);
@@ -174,9 +180,7 @@ void furi_hal_resources_init() {
     furi_hal_gpio_init(&gpio_sdcard_cd, GpioModeInput, GpioPullNo, GpioSpeedLow);
     furi_hal_gpio_write(&gpio_sdcard_cd, 0);
 
-    furi_hal_gpio_init(&vibro_gpio, GpioModeAnalog, GpioPullNo, GpioSpeedLow);
-
-    furi_hal_gpio_init(&ibutton_gpio, GpioModeAnalog, GpioPullNo, GpioSpeedLow);
+    furi_hal_gpio_init(&gpio_ibutton, GpioModeAnalog, GpioPullNo, GpioSpeedLow);
 
     NVIC_SetPriority(EXTI0_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 5, 0));
     NVIC_EnableIRQ(EXTI0_IRQn);
@@ -198,6 +202,8 @@ void furi_hal_resources_init() {
 
     NVIC_SetPriority(EXTI15_10_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 5, 0));
     NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+    FURI_LOG_I(TAG, "Init OK");
 }
 
 int32_t furi_hal_resources_get_ext_pin_number(const GpioPin* gpio) {
@@ -218,7 +224,7 @@ int32_t furi_hal_resources_get_ext_pin_number(const GpioPin* gpio) {
         return 15;
     else if(gpio == &gpio_ext_pc0)
         return 16;
-    else if(gpio == &ibutton_gpio)
+    else if(gpio == &gpio_ibutton)
         return 17;
     else
         return -1;

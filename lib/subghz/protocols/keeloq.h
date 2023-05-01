@@ -2,6 +2,12 @@
 
 #include "base.h"
 
+#include "../blocks/custom_btn.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define SUBGHZ_PROTOCOL_KEELOQ_NAME "KeeLoq"
 
 typedef struct SubGhzProtocolDecoderKeeloq SubGhzProtocolDecoderKeeloq;
@@ -14,11 +20,6 @@ extern const SubGhzProtocol subghz_protocol_keeloq;
 void keeloq_reset_mfname();
 
 void keeloq_reset_kl_type();
-
-void keeloq_set_btn(uint8_t b);
-
-uint8_t keeloq_get_original_btn();
-uint8_t keeloq_get_custom_btn();
 
 void keeloq_reset_original_btn();
 
@@ -160,3 +161,7 @@ SubGhzProtocolStatus
  * @param output Resulting text
  */
 void subghz_protocol_decoder_keeloq_get_string(void* context, FuriString* output);
+
+#ifdef __cplusplus
+}
+#endif

@@ -7,6 +7,8 @@
 #include "../blocks/generic.h"
 #include "../blocks/math.h"
 
+#include "../blocks/custom_btn.h"
+
 /*
 * Help
 * https://github.com/argilo/secplus
@@ -338,6 +340,12 @@ static void
         instance->btn = 0;
         instance->serial = 0;
     }
+
+    // Save original button for later use
+    if(subghz_custom_btn_get_original() == 0) {
+        subghz_custom_btn_set_original(instance->btn);
+    }
+    subghz_custom_btn_set_max(3);
 }
 
 /** 
@@ -373,6 +381,75 @@ static uint64_t subghz_protocol_secplus_v2_encode_half(uint8_t roll_array[], uin
  */
 
 static void subghz_protocol_secplus_v2_encode(SubGhzProtocolEncoderSecPlus_v2* instance) {
+    // Save original button for later use
+    if(subghz_custom_btn_get_original() == 0) {
+        subghz_custom_btn_set_original(instance->generic.btn);
+    }
+
+    uint8_t custom_btn_id = subghz_custom_btn_get();
+    uint8_t original_btn_num = subghz_custom_btn_get_original();
+
+    // Set custom button
+    if(custom_btn_id == 1) {
+        switch(original_btn_num) {
+        case 0x68:
+            instance->generic.btn = 0x80;
+            break;
+        case 0x80:
+            instance->generic.btn = 0x68;
+            break;
+        case 0x81:
+            instance->generic.btn = 0x80;
+            break;
+        case 0xE2:
+            instance->generic.btn = 0x80;
+            break;
+
+        default:
+            break;
+        }
+    }
+    if(custom_btn_id == 2) {
+        switch(original_btn_num) {
+        case 0x68:
+            instance->generic.btn = 0x81;
+            break;
+        case 0x80:
+            instance->generic.btn = 0x81;
+            break;
+        case 0x81:
+            instance->generic.btn = 0x68;
+            break;
+        case 0xE2:
+            instance->generic.btn = 0x81;
+            break;
+
+        default:
+            break;
+        }
+    }
+    if(custom_btn_id == 3) {
+        switch(original_btn_num) {
+        case 0x68:
+            instance->generic.btn = 0xE2;
+            break;
+        case 0x80:
+            instance->generic.btn = 0xE2;
+            break;
+        case 0x81:
+            instance->generic.btn = 0xE2;
+            break;
+        case 0xE2:
+            instance->generic.btn = 0x68;
+            break;
+
+        default:
+            break;
+        }
+    }
+    if((custom_btn_id == 0) && (original_btn_num != 0)) {
+        instance->generic.btn = original_btn_num;
+    }
     uint32_t fixed_1[1] = {instance->generic.btn << 12 | instance->generic.serial >> 20};
     uint32_t fixed_2[1] = {instance->generic.serial & 0xFFFFF};
     uint8_t rolling_digits[18] = {0};
@@ -611,7 +688,7 @@ bool subghz_protocol_secplus_v2_create_data(
     if((res == SubGhzProtocolStatusOk) &&
        !flipper_format_write_hex(flipper_format, "Secplus_packet_1", key_data, sizeof(uint64_t))) {
         FURI_LOG_E(TAG, "Unable to add Secplus_packet_1");
-        res = SubGhzProtocolStatusError;
+        res = SubGhzProtocolStatusErrorParserOthers;
     }
     return res == SubGhzProtocolStatusOk;
 }

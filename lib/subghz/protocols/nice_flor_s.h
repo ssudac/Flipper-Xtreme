@@ -2,6 +2,10 @@
 
 #include "base.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define SUBGHZ_PROTOCOL_NICE_FLOR_S_NAME "Nice FloR-S"
 
 typedef struct SubGhzProtocolDecoderNiceFlorS SubGhzProtocolDecoderNiceFlorS;
@@ -10,14 +14,6 @@ typedef struct SubGhzProtocolEncoderNiceFlorS SubGhzProtocolEncoderNiceFlorS;
 extern const SubGhzProtocolDecoder subghz_protocol_nice_flor_s_decoder;
 extern const SubGhzProtocolEncoder subghz_protocol_nice_flor_s_encoder;
 extern const SubGhzProtocol subghz_protocol_nice_flor_s;
-
-// Custom buttons
-void nice_flors_set_btn(uint8_t b);
-
-uint8_t nice_flors_get_original_btn();
-uint8_t nice_flors_get_custom_btn();
-
-void nice_flors_reset_original_btn();
 
 /**
  * Allocate SubGhzProtocolEncoderNiceFlorS.
@@ -137,3 +133,7 @@ SubGhzProtocolStatus
  * @param output Resulting text
  */
 void subghz_protocol_decoder_nice_flor_s_get_string(void* context, FuriString* output);
+
+#ifdef __cplusplus
+}
+#endif

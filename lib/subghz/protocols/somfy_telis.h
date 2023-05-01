@@ -2,6 +2,10 @@
 
 #include "base.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define SUBGHZ_PROTOCOL_SOMFY_TELIS_NAME "Somfy Telis"
 
 typedef struct SubGhzProtocolDecoderSomfyTelis SubGhzProtocolDecoderSomfyTelis;
@@ -10,14 +14,6 @@ typedef struct SubGhzProtocolEncoderSomfyTelis SubGhzProtocolEncoderSomfyTelis;
 extern const SubGhzProtocolDecoder subghz_protocol_somfy_telis_decoder;
 extern const SubGhzProtocolEncoder subghz_protocol_somfy_telis_encoder;
 extern const SubGhzProtocol subghz_protocol_somfy_telis;
-
-// Custom buttons
-void somfy_telis_set_btn(uint8_t b);
-
-uint8_t somfy_telis_get_original_btn();
-uint8_t somfy_telis_get_custom_btn();
-
-void somfy_telis_reset_original_btn();
 
 /**
  * Allocate SubGhzProtocolEncoderSomfyTelis.
@@ -133,3 +129,7 @@ SubGhzProtocolStatus
  * @param output Resulting text
  */
 void subghz_protocol_decoder_somfy_telis_get_string(void* context, FuriString* output);
+
+#ifdef __cplusplus
+}
+#endif

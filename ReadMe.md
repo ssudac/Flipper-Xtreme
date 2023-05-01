@@ -5,7 +5,7 @@
   <img src="https://user-images.githubusercontent.com/55334727/215170306-051eeb8f-8f72-437f-8c2d-0e4be009bdad.png">
 </p>
 
-[Intro](https://github.com/ClaraCrazy/Flipper-Xtreme#What-makes-it-special) | [Animations](https://github.com/ClaraCrazy/Flipper-Xtreme#Animations--Asset-Packs) | [Wiki](https://github.com/ClaraCrazy/Flipper-Xtreme/wiki) | [Changelog](https://github.com/ClaraCrazy/Flipper-Xtreme#list-of-changes) | [Known bugs](https://github.com/ClaraCrazy/Flipper-Xtreme/issues?q=is%3Aissue+is%3Aopen+label%3Arelease-pending) | [Install](https://github.com/ClaraCrazy/Flipper-Xtreme#Install) | [Build](https://github.com/ClaraCrazy/Flipper-Xtreme#build-it-yourself) | [Discord](https://discord.gg/flipper-xtreme)
+[Intro](https://github.com/ClaraCrazy/Flipper-Xtreme#What-makes-it-special) | [Animations](https://github.com/ClaraCrazy/Flipper-Xtreme#Animations--Asset-Packs) | [Wiki](https://github.com/ClaraCrazy/Flipper-Xtreme/wiki) | [Changelog](https://github.com/ClaraCrazy/Flipper-Xtreme#list-of-changes) | [Known bugs](https://github.com/ClaraCrazy/Flipper-Xtreme/issues?q=is%3Aissue+is%3Aopen+label%3Arelease-pending) | [Install](https://github.com/ClaraCrazy/Flipper-Xtreme#Install) | [Build](https://github.com/ClaraCrazy/Flipper-Xtreme#build-it-yourself) | [Discord](https://discord.gg/flipper-xtreme) | [Donate](https://github.com/ClaraCrazy/Flipper-Xtreme#%EF%B8%8F-support)
 -----
 
 This firmware is a complete overhaul of the [Official Firmware](https://github.com/flipperdevices/flipperzero-firmware), and also features lots of awesome code-bits from [Unleashed](https://github.com/DarkFlippers/unleashed-firmware).
@@ -23,6 +23,8 @@ The goal of this Firmware is to regularly bring out amazing updates based on wha
 - <h4>Stable: Many hours have been spent rewriting core parts of the Flippers firmware as well as some of its apps to ensure stability. A task that was long needed on all Firmware, so we tackled it right away.</h4>
 
 - <h4>Customizable: Dont like the Animations, want to turn on/off the Home screen icons (battery, SD card etc), change the flippers name or anything like that? You absolutely can. No need to mess with code or deal with weird manifest files. Its all done with an App.</h4>
+<br><br>
+Note, the below mentioned changes are only a few things we did. For a full list click [here](https://github.com/ClaraCrazy/Flipper-Xtreme/wiki/Customization)
 
 -----
 <br>
@@ -30,17 +32,16 @@ The goal of this Firmware is to regularly bring out amazing updates based on wha
 
 We wrote a powerful yet easy-to-use application specifically for our Firmware, that gives you easy-access to all the fancy things we implemented:
 
-<img src="https://user-images.githubusercontent.com/55334727/222941141-32e3ef23-1dad-473f-86ee-45bef66ebd77.gif" align="left" width="400px"/>
+<img src="https://user-images.githubusercontent.com/49810075/228392945-1e68b996-4e2c-46c6-8aae-d0aadd8ea001.gif" align="left" width="400px"/>
 
-<details><summary><code>Graphics:</code></summary>Change the animation package (more on that below), the play speed of them, cycle duration and bypass level-bassed animations</details>
+<ins><b>Interface:</b></ins>
+Customize every bit of your Flipper, from the desktop animations, to the main menu apps, lockscreen style, statusbar items and screen options like dark mode and lefty mode(yes, we thought about you :3 ).
 
-<details><summary><code>Statusbar:</code></summary>Modify the design of the statusbar seen on the main Screen. Toggle Icons, their background, the top line and modify the battery icon to your liking.</details>
+<ins><b>Protocols:</b></ins>
+Here you can toggle USB & Bluetooth mode for our Bad-Keyboard app, and manage Subghz settings like custom frequencies and extend options.
 
-<details><summary><code>Protocols:</code></summary>Here you can cycle between USB & Bluetooth mode for our Bad-Keyboard app, and toggle Subghz settings.</details>
-
-<details><summary><code>Dolphin:</code></summary>Two simple yet sought after features: Simply change the level of your Flipper and disable / change the "Butthurt timer", aka. the time it takes for the Flipper to get sad when its not used.</details>
-
-<details><summary><code>Misc:</code></summary>All the other options that dont fit elsewhere. Toggles for our custom dark mode & left-handed mode (yes, we thought about you :3 ), an option to change the Flippers name and a switch for file sorting.</details>
+<ins><b>Misc:</b></ins>
+All the other options that don't fit elsewhere. Change your Flipper's name, change xp level, and manage settings for RGB backlight.
 
 <br clear="left"/>
 
@@ -122,7 +123,7 @@ Note: This repo is always updated with OFW & Unleashed. No need to mention all t
 - Custom subghz presets
 - Multiple NFC protocols
 - Multiple Sub-Ghz protocols | Merged from Unleashed, thanks @xMasterX
-- Subghz and IR signal replication via gpio | Credits to @ankris812
+- Subghz and IR signal replication via gpio | Credits to @xMasterX
 
 - New API Routes for Locale settings
 ```
@@ -157,20 +158,37 @@ Note: This repo is always updated with OFW & Unleashed. No need to mention all t
 ----
 <br>
 <h2 align="center">Install:</h2>
+<br>
 
-**This is the recommended install procedure. Please follow these steps EXACTLY and CAREFULLY to ensure you install correctly.**
-**This process will NOT delete any saved files and simply ensures the install goes smoothly.**
-<br><br>
+There are 3 methods to install Xtreme, we recommend you use the **Web Updater**, but choose whichever one you prefer:
 
-- Download the latest release (.zip) from [The releases tab](https://github.com/ClaraCrazy/Flipper-Xtreme/releases/latest)
-- Extract the archive. This is now your new Firmware folder
-- Open [qFlipper](https://flipperzero.one/update), head to `SD/Update` and simply move the firmware folder there
-- On the Flipper, hit the `Arrow Down` button, this will get you to the file menu. In there simply search for your updates folder
-- Inside that folder, select the Firmware you just moved onto it, and run the file thats simply called `Update`
+<br>
 
-- Enjoy!
+> <details><summary><code>Web Updater (Chrome)</code></summary><ul>
+>   <li>Open the <a href="https://github.com/ClaraCrazy/Flipper-Xtreme/releases/latest">latest release page</a> and click on the <code>Web Updater</code> link</li>
+>   <li>Make sure qFlipper is closed</li>
+>   <li>Click <code>Connect</code> and select your Flipper from the list</li>
+>   <li>Click <code>Install</code> and wait for the update to complete</li>
+> </ul></details>
 
-**If you have issues or crashes with that process, you can try to use `Settings > Storage > Factory Reset` then retry the install.**
+> <details><summary><code>qFlipper Package (.tgz)</code></summary><ul>
+>   <li>Download the qFlipper package (.tgz) from the <a href="https://github.com/ClaraCrazy/Flipper-Xtreme/releases/latest">latest release page</a></li>
+>   <li>Open <a href="https://flipperzero.one/update">qFlipper</a> and connect your Flipper</li>
+>   <li>Click <code>Install from file</code></li>
+>   <li>Select the .tgz you downloaded and wait for the update to complete</li>
+> </ul></details>
+
+> <details><summary><code>Zipped Archive (.zip)</code></summary><ul>
+>   <li>Download the zipped archive (.zip) from the <a href="https://github.com/ClaraCrazy/Flipper-Xtreme/releases/latest">latest release page</a></li>
+>   <li>Extract the archive. This is now your new Firmware folder</li>
+>   <li>Open <a href="https://flipperzero.one/update">qFlipper</a>, head to <code>SD/Update</code> and simply move the firmware folder there</li>
+>   <li>On the Flipper, hit the <code>Arrow Down</code> button, this will get you to the file menu. In there simply search for your updates folder</li>
+>   <li>Inside that folder, select the Firmware you just moved onto it, and run the file thats simply called <code>Update</code></li>
+> </ul></details>
+
+<br>
+
+**If you have issues or crashes with the install process, you can try to use `Settings > Storage > Factory Reset` then retry the install.**
 **Doing that will NOT remove your saved files, it will only forget some settings and paired devices.**
 
 ----
@@ -203,15 +221,18 @@ $ ./fbt resources icons dolphin_ext
 ----
 <h2 align="center">Contributors</h2>
 
-[![Contributors](https://user-images.githubusercontent.com/55334727/212134625-21383102-02f3-453f-b1d7-8a9c65b27612.svg)](https://github.com/ClaraCrazy/Flipper-Xtreme/graphs/contributors)
+[![Contributors](https://user-images.githubusercontent.com/49810075/228231815-8f0a267d-ac1a-494c-9cd0-1cd57568fc79.svg)](https://github.com/ClaraCrazy/Flipper-Xtreme/graphs/contributors)
 
 
-----
-## SAST Tools
+## ❤️ Support
+If you like what you're seeing, **please consider donating to us**. We won't ever put this behind a paywall, but we'd still appreciate a few bucks!
 
-This helps us a lot, thanks for the free license for this project!
+- **[Direct Wire-transfer](https://bunq.me/ClaraK)**: No account needed, just specify amount and hit send
+- **[Patreon](https://patreon.com/CynthiaLabs)**
+- **[Paypal](https://paypal.me/RdX2020)**
+- **Monero**: `41kyWeeoVdK4quzQ4M9ikVGs6tCQCLfdx8jLExTNsAu2SF1QAyDqRdjfGM6EL8L9NpXwt89HJeAoGf1aoArk7nDr4AMMV4T`
 
-[PVS-Studio](https://pvs-studio.com/en/pvs-studio/?utm_source=github&utm_medium=organic&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
+**Thanks for all your support <3**
 
 ----
 <p align="center"> "What we do for ourselves dies with us. What we do for others and the world remains and is immortal.” ― Albert Pine </p>

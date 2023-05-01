@@ -1,6 +1,10 @@
 #pragma once
 #include "base.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define SUBGHZ_PROTOCOL_ALUTECH_AT_4N_NAME "Alutech AT-4N"
 
 typedef struct SubGhzProtocolDecoderAlutech_at_4n SubGhzProtocolDecoderAlutech_at_4n;
@@ -9,14 +13,6 @@ typedef struct SubGhzProtocolEncoderAlutech_at_4n SubGhzProtocolEncoderAlutech_a
 extern const SubGhzProtocolDecoder subghz_protocol_alutech_at_4n_decoder;
 extern const SubGhzProtocolEncoder subghz_protocol_alutech_at_4n_encoder;
 extern const SubGhzProtocol subghz_protocol_alutech_at_4n;
-
-// Custom buttons
-void alutech_set_btn(uint8_t b);
-
-uint8_t alutech_get_original_btn();
-uint8_t alutech_get_custom_btn();
-
-void alutech_reset_original_btn();
 
 /**
  * Allocate SubGhzProtocolEncoderAlutech_at_4n.
@@ -132,3 +128,7 @@ SubGhzProtocolStatus
  * @param output Resulting text
  */
 void subghz_protocol_decoder_alutech_at_4n_get_string(void* context, FuriString* output);
+
+#ifdef __cplusplus
+}
+#endif
